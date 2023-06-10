@@ -4,7 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/GoogleDriveSync/Projects/Terrain Maker/Terrain Maker/Content/Generic/1x1rectangle.png</File>
+    <File>D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/Generic/1x1rectangle.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
