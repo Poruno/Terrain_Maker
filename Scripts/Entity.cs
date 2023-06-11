@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Xml;
 using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,34 +18,54 @@ namespace Terrain_Maker.Scripts
         public List<Component> Components { get { return this.components; } }
 
         int id;
-        IntVector2 position, size;
+        
         List<Component> components;
         
         public Entity () {
-            this.position = IntVector2.Zero;
-            this.size = IntVector2.Zero;
             this.id = new Random().Next();
             this.components = new List<Component>();
         }
 
         public int ID { get { return id; } }
-        public IntVector2 Position { get { return position; } }
-        public IntVector2 Size { get {  return size; } }
-
-        public void Move(int x, int y) {
-            this.position = new IntVector2(x, y);
-        }
-
-        public void Resize(int width, int height) {
-            this.size = new IntVector2(width, height);
-        }
 
         public void AddComponent(Component component) {
             this.components.Add(component);
+
+            ValidateIfEntityHasRequiredComponents(component);
         }
 
         public void AddComponent<T>() where T: Component, new() {
-            this.components.Add(new T());
+
+            var component = new T();
+            this.components.Add(component);
+
+            ValidateIfEntityHasRequiredComponents(component);
+        }
+
+        // Debugging // Move to unit test later
+        void ValidateIfEntityHasRequiredComponents(Component component) {
+
+            List<string> missingComponents = new List<string>();
+
+            for (var x = 0; x < component.REQUIRED_COMPONENTS.Length; ++x) {
+                var hasMatch = false;
+
+                foreach (var equippedComponent in components) {
+                    var capitalizedRequiredComponent = component.REQUIRED_COMPONENTS[x].ToUpper();
+                    var capitalizedEquippedComponent = equippedComponent.GetType().Name.ToUpper();
+                    
+                    if(capitalizedRequiredComponent == capitalizedEquippedComponent) {
+                        hasMatch = true;
+                    }
+                }
+                if (!hasMatch) {
+                    missingComponents.Add(component.REQUIRED_COMPONENTS[x]);
+                }
+            }
+
+            foreach(var missingComponent in missingComponents) {
+                throw (new Exception($"Entity ({this.GetType().Name},id:{this.id}), Component: {component.GetType().Name} is missing the required Component: {missingComponent}"));
+            }
         }
          
         public void RemoveComponent(Component component) { 
@@ -51,22 +76,19 @@ namespace Terrain_Maker.Scripts
             components.Remove(GetComponent<T>());
         }
 
-        // not sure if it works since it is returning another value made inside of the function
         public T GetComponent<T> () where T : Component {
-            Component foundComponent = new EmptyComponent();
-            
             foreach (var component in components) {
-                if(component.GetType().ToString() == typeof(T).Name) {
-                    foundComponent = component;
+                if(component.GetType().Name == typeof(T).Name) {
+                    return (T)component;
                 }
             }
-            return (T)foundComponent;
+            return default(T);
         }
 
         public bool HasComponent <T>() where T : Component {
             bool hasComponent = false;
             foreach (var component in components) {
-                if (component.GetType().ToString() == typeof(T).Name) {
+                if (component.GetType().Name == typeof(T).Name) {
                     hasComponent = true;
                 }
             }

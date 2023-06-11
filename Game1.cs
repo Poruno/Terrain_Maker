@@ -22,6 +22,12 @@ namespace Terrain_Maker {
             // TODO: Add your initialization logic here
 
             world = new World();
+
+            _graphics.IsFullScreen = false;
+            _graphics.PreferredBackBufferWidth = 640;
+            _graphics.PreferredBackBufferHeight = 480;
+            _graphics.ApplyChanges();
+
             base.Initialize();
         }
 
