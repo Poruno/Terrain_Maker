@@ -11,8 +11,8 @@ namespace Terrain_Maker.Scripts.Entities {
             
             AddComponent<Transform>();
             AddComponent(new Drawable(this, "Generic/1x1rectangle"));
-            this.GetComponent<Transform>().Resize(100, 100);
-            this.GetComponent<Transform>().Move(50, 50);
+            AddComponent(new Hoverable(this, "Generic/1x1rectangle"));
+            this.GetComponent<Transform>().Resize(50, 50);
         }
     }
 }

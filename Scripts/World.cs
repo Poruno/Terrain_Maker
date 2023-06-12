@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Terrain_Maker.Scripts.Components;
 using Terrain_Maker.Scripts.Entities;
 
 namespace Terrain_Maker.Scripts {
@@ -26,10 +27,19 @@ namespace Terrain_Maker.Scripts {
         }
 
         public void LoadContent(ContentManager content, SpriteBatch spriteBatch) {
-            entities.Add(new Tile());
+
+            var gridSize = 64;
+            for (var x = 0; x < (int)Math.Sqrt(gridSize); ++x) {
+                for (var y = 0; y < (int)Math.Sqrt(gridSize); ++y) {
+                    var tile = new Tile();
+                    IntVector2 tileSize = new IntVector2(tile.GetComponent<Transform>().Size.X, tile.GetComponent<Transform>().Size.Y);
+                    tile.GetComponent<Transform>().Move(x * tileSize.X, y * tileSize.Y);
+                    entities.Add(tile);
+                }
+            }
 
             foreach (Entity entity in entities) {
-                foreach (Component component in entity.Components) {
+                foreach (IComponent component in entity.Components) {
                     component.LoadComponent(content, spriteBatch);
                     
                 }
@@ -38,7 +48,7 @@ namespace Terrain_Maker.Scripts {
 
         public void Update(GameTime gameTime) {
             foreach(Entity entity in entities) {
-                foreach(Component component in entity.Components) {
+                foreach(IComponent component in entity.Components) {
                     component.Update(gameTime);
                 }
             }
@@ -46,7 +56,7 @@ namespace Terrain_Maker.Scripts {
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch) {
             foreach (Entity entity in entities) {
-                foreach (Component component in entity.Components) {
+                foreach (IComponent component in entity.Components) {
                     component.Draw(gameTime, spriteBatch);
                 }
             }

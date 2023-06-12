@@ -24,8 +24,8 @@ namespace Terrain_Maker {
             world = new World();
 
             _graphics.IsFullScreen = false;
-            _graphics.PreferredBackBufferWidth = 640;
-            _graphics.PreferredBackBufferHeight = 480;
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
             _graphics.ApplyChanges();
 
             base.Initialize();
@@ -51,7 +51,7 @@ namespace Terrain_Maker {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             world.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);

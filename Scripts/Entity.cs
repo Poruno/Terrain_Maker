@@ -15,35 +15,35 @@ namespace Terrain_Maker.Scripts
 {
     public abstract class Entity {
 
-        public List<Component> Components { get { return this.components; } }
+        public List<IComponent> Components { get { return this.components; } }
 
         int id;
         
-        List<Component> components;
+        List<IComponent> components;
         
         public Entity () {
             this.id = new Random().Next();
-            this.components = new List<Component>();
+            this.components = new List<IComponent>();
         }
 
         public int ID { get { return id; } }
 
-        public void AddComponent(Component component) {
+        public void AddComponent(IComponent component) {
             this.components.Add(component);
 
             ValidateIfEntityHasRequiredComponents(component);
         }
 
-        public void AddComponent<T>() where T: Component, new() {
+        public void AddComponent<TComponent>() where TComponent: IComponent, new() {
 
-            var component = new T();
+            var component = new TComponent();
             this.components.Add(component);
 
             ValidateIfEntityHasRequiredComponents(component);
         }
 
         // Debugging // Move to unit test later
-        void ValidateIfEntityHasRequiredComponents(Component component) {
+        void ValidateIfEntityHasRequiredComponents(IComponent component) {
 
             List<string> missingComponents = new List<string>();
 
@@ -68,27 +68,28 @@ namespace Terrain_Maker.Scripts
             }
         }
          
-        public void RemoveComponent(Component component) { 
+        public void RemoveComponent(IComponent component) { 
             this.components.Remove(component);
         }
 
-        public void RemoveComponent<T>() where T: Component {
-            components.Remove(GetComponent<T>());
+        public void RemoveComponent<TComponent>() where TComponent: IComponent {
+            components.Remove(GetComponent<TComponent>());
         }
 
-        public T GetComponent<T> () where T : Component {
+        public TComponent GetComponent<TComponent>() where TComponent : IComponent {
             foreach (var component in components) {
-                if(component.GetType().Name == typeof(T).Name) {
-                    return (T)component;
+                if(component.GetType().Name == typeof(TComponent).Name) {
+                    return (TComponent)component;
                 }
             }
-            return default(T);
+            throw (new Exception($"{typeof(TComponent).Name} not found! on Entity {this.GetType().Name},{this.id}"));
+            return default(TComponent);
         }
 
-        public bool HasComponent <T>() where T : Component {
+        public bool HasComponent <TComponent>() where TComponent : IComponent {
             bool hasComponent = false;
             foreach (var component in components) {
-                if (component.GetType().Name == typeof(T).Name) {
+                if (component.GetType().Name == typeof(TComponent).Name) {
                     hasComponent = true;
                 }
             }

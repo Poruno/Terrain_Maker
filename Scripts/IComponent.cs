@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Terrain_Maker.Scripts {
-    public interface Component {
+    public interface IComponent {
 
         /* Will not fully work if the entity does not possess the other components required. Hard coded */
         string[] REQUIRED_COMPONENTS { get; }
@@ -18,7 +18,7 @@ namespace Terrain_Maker.Scripts {
         void Draw(GameTime gameTime, SpriteBatch spriteBatch);
     }
 
-    public class EmptyComponent : Component {
+    public class EmptyComponent : IComponent {
         public string[] REQUIRED_COMPONENTS { get { return new string[] { }; } }
 
         public EmptyComponent() {
