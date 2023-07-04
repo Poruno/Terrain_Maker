@@ -8,11 +8,12 @@ using Terrain_Maker.Scripts.Components;
 namespace Terrain_Maker.Scripts.Entities {
     internal class Tile : Entity {
         public Tile () {
-            
-            AddComponent<Transform>();
-            AddComponent(new Drawable(this, "Generic/1x1rectangle"));
-            AddComponent(new Hoverable(this, "Generic/1x1rectangle"));
-            this.GetComponent<Transform>().Resize(50, 50);
+
+            AddComponent<CTransform>();
+            AddComponent(new CDrawable(this, "sample_tilesheet256"));
+            AddComponent(new CHoverable(this, "Generic/1x1rectangle"));
+            AddComponent(new CTileBehavior(this));
+            this.GetComponent<CTransform>().Transform(GAME_SETTINGS.TILESIZE, GAME_SETTINGS.TILESIZE);
         }
     }
 }

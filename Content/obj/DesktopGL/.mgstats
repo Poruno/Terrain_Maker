@@ -1,0 +1,6 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/Fonts/defaultFont.spritefont","D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/bin/DesktopGL/Fonts/defaultFont.xnb","LocalizedFontProcessor","SpriteFontContent",2497,937,0.2923215
+"D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/Generic/1x1rectangle.png","D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/bin/DesktopGL/Generic/1x1rectangle.xnb","TextureProcessor","Texture2DContent",68,89,0.15294
+"D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/global.png","D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/bin/DesktopGL/global.xnb","TextureProcessor","Texture2DContent",671687,10760277,0.4780187
+"D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/sample_tilesheet.png","D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/bin/DesktopGL/sample_tilesheet.xnb","TextureProcessor","Texture2DContent",672,16469,0.0042396
+"D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/sample_tilesheet2.png","D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/bin/DesktopGL/sample_tilesheet2.xnb","TextureProcessor","Texture2DContent",739,262229,0.0243088

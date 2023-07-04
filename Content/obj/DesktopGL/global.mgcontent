@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/global.png</SourceFile>
+  <SourceTime>2021-12-06T21:00:18-05:00</SourceTime>
+  <DestFile>D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/bin/DesktopGL/global.xnb</DestFile>
+  <DestTime>2023-06-20T22:54:35.3932974-04:00</DestTime>
+  <Importer>TextureImporter</Importer>
+  <ImporterTime>2022-07-26T07:44:56-04:00</ImporterTime>
+  <Processor>TextureProcessor</Processor>
+  <ProcessorTime>2022-07-26T07:44:56-04:00</ProcessorTime>
+  <Parameters>
+    <Key>ColorKeyColor</Key>
+    <Value>255,0,255,255</Value>
+  </Parameters>
+  <Parameters>
+    <Key>ColorKeyEnabled</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>GenerateMipmaps</Key>
+    <Value>False</Value>
+  </Parameters>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>ResizeToPowerOfTwo</Key>
+    <Value>False</Value>
+  </Parameters>
+  <Parameters>
+    <Key>MakeSquare</Key>
+    <Value>False</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Color</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

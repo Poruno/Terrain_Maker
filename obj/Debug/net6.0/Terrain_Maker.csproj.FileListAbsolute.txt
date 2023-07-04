@@ -25,3 +25,5 @@ D:\GoogleDriveSync\Projects\Terrain_Maker\Terrain_Maker\obj\Debug\net6.0\refint\
 D:\GoogleDriveSync\Projects\Terrain_Maker\Terrain_Maker\obj\Debug\net6.0\Terrain_Maker.pdb
 D:\GoogleDriveSync\Projects\Terrain_Maker\Terrain_Maker\obj\Debug\net6.0\Terrain_Maker.genruntimeconfig.cache
 D:\GoogleDriveSync\Projects\Terrain_Maker\Terrain_Maker\obj\Debug\net6.0\ref\Terrain_Maker.dll
+D:\GoogleDriveSync\Projects\Terrain_Maker\Terrain_Maker\bin\Debug\net6.0\Content\sample_tilesheet256.xnb
+D:\GoogleDriveSync\Projects\Terrain_Maker\Terrain_Maker\bin\Debug\net6.0\Content\Fonts\defaultFont.xnb

@@ -13,9 +13,10 @@ namespace Terrain_Maker.Scripts {
         /* Will not fully work if the entity does not possess the other components required. Hard coded */
         string[] REQUIRED_COMPONENTS { get; }
 
-        void LoadComponent(ContentManager content, SpriteBatch spriteBatch);
+        void LoadComponent(ContentManager content);
         void Update(GameTime gameTime);
         void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+        void Initialize();
     }
 
     public class EmptyComponent : IComponent {
@@ -30,9 +31,12 @@ namespace Terrain_Maker.Scripts {
         }
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch) {
 
+        }   
+        public void Initialize() {
+
         }
 
-        public void LoadComponent(ContentManager content, SpriteBatch spriteBatch) {
+        public void LoadComponent(ContentManager content) {
             throw new NotImplementedException();
         }
     }

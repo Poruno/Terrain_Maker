@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
@@ -10,7 +13,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Terrain_Maker.Scripts.Components;
 using Terrain_Maker.Scripts.Entities;
 
-namespace Terrain_Maker.Scripts {
+namespace Terrain_Maker.Scripts
+{
 
     // To keep consistency: Update and Draw functions will function as:
     // line 1: Update Entities()
@@ -21,32 +25,77 @@ namespace Terrain_Maker.Scripts {
     internal class World {
         List<Entity> entities;
         EventManager eventManager;
+
+        int totalTileCount;
+        int horizontalTileCount;
+        int verticalTileCount;
+        Dictionary<int, Road> roads;
+
+        SpriteFont defaultFont;
+
+        int hoverTilesBitsPosition { get { return totalTileCount; } }
+
         public World() {
             entities = new List<Entity>();
             eventManager = new EventManager();
         }
-
-        public void LoadContent(ContentManager content, SpriteBatch spriteBatch) {
-
-            var gridSize = 64;
-            for (var x = 0; x < (int)Math.Sqrt(gridSize); ++x) {
-                for (var y = 0; y < (int)Math.Sqrt(gridSize); ++y) {
-                    var tile = new Tile();
-                    IntVector2 tileSize = new IntVector2(tile.GetComponent<Transform>().Size.X, tile.GetComponent<Transform>().Size.Y);
-                    tile.GetComponent<Transform>().Move(x * tileSize.X, y * tileSize.Y);
-                    entities.Add(tile);
-                }
-            }
+        public void Initialize () {
 
             foreach (Entity entity in entities) {
                 foreach (IComponent component in entity.Components) {
-                    component.LoadComponent(content, spriteBatch);
-                    
+                    component.Initialize();
+                }
+            }
+        }
+
+        public void LoadContent(ContentManager content, SpriteBatch spriteBatch) {
+
+            horizontalTileCount = (int)Math.Ceiling((float)(GAME_SETTINGS.GAME_WINDOW_WIDTH/GAME_SETTINGS.TILESIZE));
+            verticalTileCount = (int)Math.Ceiling((float)(GAME_SETTINGS.GAME_WINDOW_HEIGHT / GAME_SETTINGS.TILESIZE));
+
+            totalTileCount = horizontalTileCount * verticalTileCount;
+            roads = new Dictionary<int, Road>();
+
+            defaultFont = content.Load<SpriteFont>("Fonts/defaultFont");
+            //// hover tiles
+            //for (var x = 0; x < horizontalTileCount; ++x) {
+            //    for (var y = 0; y < verticalTileCount; ++y) {
+            //        var tile = new Tile ();
+            //        IntVector2 tileSize = new IntVector2(tile.GetComponent<CTransform>().Size.X, tile.GetComponent<CTransform>().Size.Y);
+            //        tile.GetComponent<CTransform>().Translate(x * tileSize.X, y * tileSize.Y);
+            //        tile.GetComponent<CTileBehavior>().ChangeLocation(1 << (x * y));
+            //        tile.GetComponent<CTileBehavior>().ChangeBitState(CTileBehavior.BitStates.all);
+            //        entities.Add(tile);
+            //    }
+            //}
+
+            //var sampleTile = new Tile();
+            //var sampleTileSize = new IntVector2(sampleTile.GetComponent<CTransform>().Size.X, sampleTile.GetComponent<CTransform>().Size.Y);
+            //sampleTile.GetComponent<CTileBehavior>().ChangeBitState(CTileBehavior.BitStates.left | CTileBehavior.BitStates.top);
+            //sampleTile.GetComponent<CTransform>().Translate(0,0);
+            //entities.Add(sampleTile);
+
+            //Debug.WriteLine((int)(CTileBehavior.BitStates.top | CTileBehavior.BitStates.left));
+
+            //// sample tilesheet
+            //for (var x = 0; x < 4; ++x) {
+            //    for (var y = 0; y < 4; ++y) {
+            //        var road = new Road();
+            //        road.GetComponent<CDrawable>().ChangeSrcRectangle(new Rectangle(GAME_SETTINGS.TEXTURE_SIZE * x, GAME_SETTINGS.TEXTURE_SIZE * y, GAME_SETTINGS.TEXTURE_SIZE, GAME_SETTINGS.TEXTURE_SIZE));
+            //        road.GetComponent<CTransform>().Translate(GAME_SETTINGS.TILESIZE * x, GAME_SETTINGS.TILESIZE * y);
+            //        entities.Add(road);
+            //    }
+            //}
+
+            foreach (Entity entity in entities) {
+                foreach (IComponent component in entity.Components) {
+                    component.LoadComponent(content);
                 }
             }
         }
 
         public void Update(GameTime gameTime) {
+
             foreach(Entity entity in entities) {
                 foreach(IComponent component in entity.Components) {
                     component.Update(gameTime);
@@ -60,10 +109,6 @@ namespace Terrain_Maker.Scripts {
                     component.Draw(gameTime, spriteBatch);
                 }
             }
-        }
-
-        public Entity CreateEntity () {
-            return new EmptyEntity();
         }
     }
 }

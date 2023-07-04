@@ -4,9 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/Fonts/defaultFont.spritefont</File>
     <File>D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/Generic/1x1rectangle.png</File>
+    <File>D:/GoogleDriveSync/Projects/Terrain_Maker/Terrain_Maker/Content/sample_tilesheet256.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>
